@@ -1,4 +1,4 @@
-name: Docker Image CI
+name: aliyun_verysync 
 on:
   workflow_dispatch:
 jobs:
@@ -16,7 +16,7 @@ jobs:
         run: |
           docker version
           # 登录阿里云镜像仓库
-          docker login --username=${{ zkq_docker1 }} --password=${{ zhao901109 }} crpi-jufwe66303jo64ds.cn-qingdao.personal.cr.aliyuncs.com
+          docker login --username=${{ ishqle@verysync  }} --password=${{ zhao901109 }} crpi-jufwe66303jo64ds.cn-qingdao.personal.cr.aliyuncs.com
           cd xxl-job-admin
           # 使用Dockerfile构建镜像
           docker build . --file Dockerfile --tag crpi-jufwe66303jo64ds.cn-qingdao.personal.cr.aliyuncs.com/zkq_docker1/verysync
