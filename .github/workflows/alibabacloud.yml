@@ -9,7 +9,7 @@ env:
   REGION_ID: cn-qingdao
   REGISTRY: crpi-jufwe66303jo64ds.cn-qingdao.personal.cr.aliyuncs.com
   NAMESPACE: zkq_docker1
-  TAG: $(date +%d)
+  TAG: V1.0
   ACK_DEPLOYMENT_NAME: nginx-deployment
   INSTANCE_ID: crpi-jufwe66303jo64ds
 
