@@ -9,7 +9,7 @@ env:
   REGION_ID: cn-qingdao
   REGISTRY: crpi-jufwe66303jo64ds.cn-qingdao.personal.cr.aliyuncs.com
   NAMESPACE: zkq_docker1
-  TAG: V1.3
+  TAG: V1.4
   ACK_DEPLOYMENT_NAME: nginx-deployment
   INSTANCE_ID: crpi-jufwe66303jo64ds
 
@@ -33,5 +33,5 @@ jobs:
     # 1.2 Build and push image to ACR
     - name: Build and push image to ACR
       run: |
-        docker build . --file Dockerfile --tag "$REGISTRY/$NAMESPACE/${{ secrets.IMAGE }}:$TAG"
+        docker build . --file Dockerfile.aarch64 --tag "$REGISTRY/$NAMESPACE/${{ secrets.IMAGE }}:$TAG"
         docker push "$REGISTRY/$NAMESPACE/${{ secrets.IMAGE }}:$TAG" 
