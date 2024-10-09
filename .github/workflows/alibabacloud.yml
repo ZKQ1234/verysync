@@ -33,5 +33,5 @@ jobs:
     # 1.2 Build and push image to ACR
     - name: Build and push image to ACR
       run: |
-        docker build . --file Dockerfile.aarch64 --tag "$REGISTRY/$NAMESPACE/${{ secrets.IMAGE }}:$TAG"
+        docker build . --file Dockerfile --tag "$REGISTRY/$NAMESPACE/${{ secrets.IMAGE }}:$TAG"
         docker push "$REGISTRY/$NAMESPACE/${{ secrets.IMAGE }}:$TAG" 
