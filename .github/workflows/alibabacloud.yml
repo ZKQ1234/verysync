@@ -26,14 +26,14 @@ on:
 # Environment variables available to all jobs and steps in this workflow.
 env:
   REGION_ID: cn-qingdao
-  REGISTRY: crpi-jufwe66303jo64ds-vpc.cn-qingdao.personal.cr.aliyuncs.com
+  REGISTRY: crpi-jufwe66303jo64ds.cn-qingdao.personal.cr.aliyuncs.com
   NAMESPACE: zkq_docker1
   IMAGE: verysync
   TAG: $(date +%s)
   ACK_CLUSTER_ID: clusterID
   ACK_DEPLOYMENT_NAME: nginx-deployment
 
-  ACR_EE_REGISTRY: crpi-jufwe66303jo64ds-vpc.cn-qingdao.personal.cr.aliyuncs.com
+  ACR_EE_REGISTRY: crpi-jufwe66303jo64ds.cn-qingdao.personal.cr.aliyuncs.com
   ACR_EE_INSTANCE_ID: crpi-jufwe66303jo64ds
   ACR_EE_NAMESPACE: zkq_docker1
   ACR_EE_IMAGE: verysync
