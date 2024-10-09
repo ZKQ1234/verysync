@@ -29,7 +29,7 @@ env:
   REGISTRY: crpi-jufwe66303jo64ds.cn-qingdao.personal.cr.aliyuncs.com
   NAMESPACE: zkq_docker1
   IMAGE: verysync
-  TAG: $(date +%s)
+  TAG: V1.0
   ACK_CLUSTER_ID: clusterID
   ACK_DEPLOYMENT_NAME: nginx-deployment
 
