@@ -7,7 +7,7 @@ on:
 # Environment variables available to all jobs and steps in this workflow.
 env:
   REGION_ID: cn-qingdao
-  REGISTRY: crpi-jufwe66303jo64ds-vpc.cn-qingdao.personal.cr.aliyuncs.com
+  REGISTRY: crpi-jufwe66303jo64ds.cn-qingdao.personal.cr.aliyuncs.com
   NAMESPACE: zkq_docker1
   TAG: $(date +%d)
   ACK_DEPLOYMENT_NAME: nginx-deployment
@@ -43,5 +43,5 @@ jobs:
         region-id: "${{ env.REGION_ID }}"
         access-key-id: "${{ secrets.ACCESS_KEY_ID }}"
         access-key-secret: "${{ secrets.ACCESS_KEY_SECRET }}"
-        repository: "${{ env.NAMESPACE }}/${{ env.IMAGE }}"
+        repository: "${{ env.NAMESPACE }}/${{ secrets.IMAGE }}"
         tag: "${{ env.TAG }}"
