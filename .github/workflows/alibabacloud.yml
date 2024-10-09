@@ -29,9 +29,15 @@ env:
   REGISTRY: crpi-jufwe66303jo64ds-vpc.cn-qingdao.personal.cr.aliyuncs.com
   NAMESPACE: zkq_docker1
   IMAGE: verysync
-  TAG: $(date +%d)
+  TAG: $(date +%s)
   ACK_CLUSTER_ID: clusterID
   ACK_DEPLOYMENT_NAME: nginx-deployment
+
+  ACR_EE_REGISTRY: crpi-jufwe66303jo64ds-vpc.cn-qingdao.personal.cr.aliyuncs.com
+  ACR_EE_INSTANCE_ID: crpi-jufwe66303jo64ds
+  ACR_EE_NAMESPACE: zkq_docker1
+  ACR_EE_IMAGE: verysync
+  ACR_EE_TAG: $(date +%d)
 
 permissions:
   contents: read
@@ -56,7 +62,7 @@ jobs:
     # 1.2 Build and push image to ACR
     - name: Build and push image to ACR
       run: |
-        docker build . --file Dockerfile --tag "$REGISTRY/$NAMESPACE/$IMAGE:$TAG" .
+        docker build --tag "$REGISTRY/$NAMESPACE/$IMAGE:$TAG" .
         docker push "$REGISTRY/$NAMESPACE/$IMAGE:$TAG"
 
     # 1.3 Scan image in ACR
@@ -69,6 +75,32 @@ jobs:
         repository: "${{ env.NAMESPACE }}/${{ env.IMAGE }}"
         tag: "${{ env.TAG }}"
 
+    # 2.1 (Optional) Login to ACR EE
+    - uses: actions/checkout@v4
+    - name: Login to ACR EE with the AccessKey pair
+      uses: aliyun/acr-login@v1
+      with:
+        login-server: "https://${{ env.ACR_EE_REGISTRY }}"
+        region-id: "${{ env.REGION_ID }}"
+        access-key-id: "${{ secrets.ACCESS_KEY_ID }}"
+        access-key-secret: "${{ secrets.ACCESS_KEY_SECRET }}"
+        instance-id: "${{ env.ACR_EE_INSTANCE_ID }}"
+
+    # 2.2 (Optional) Build and push image ACR EE
+    - name: Build and push image to ACR EE
+      run: |
+        docker build -t "$ACR_EE_REGISTRY/$ACR_EE_NAMESPACE/$ACR_EE_IMAGE:$TAG" .
+        docker push "$ACR_EE_REGISTRY/$ACR_EE_NAMESPACE/$ACR_EE_IMAGE:$TAG"
+    # 2.3 (Optional) Scan image in ACR EE
+    - name: Scan image in ACR EE
+      uses: aliyun/acr-scan@v1
+      with:
+        region-id: "${{ env.REGION_ID }}"
+        access-key-id: "${{ secrets.ACCESS_KEY_ID }}"
+        access-key-secret: "${{ secrets.ACCESS_KEY_SECRET }}"
+        instance-id: "${{ env.ACR_EE_INSTANCE_ID }}"
+        repository: "${{ env.ACR_EE_NAMESPACE}}/${{ env.ACR_EE_IMAGE }}"
+        tag: "${{ env.ACR_EE_TAG }}"
 
     # 3.1 Set ACK context
     - name: Set K8s context
